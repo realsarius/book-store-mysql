@@ -1,28 +1,20 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import ShowBooks from './components/showBooks';
+import { Routes, Route } from 'react-router-dom';
+import Books from './pages/Books';
+import Home from './pages/Home';
+import AddBook from './pages/Add';
+import UpdateBook from './pages/Update';
+import Navigation from './components/Navigation';
 
 function App() {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-    axios
-      .get('http://localhost:8800/books')
-      .then((res) => {
-        setLoading(false);
-        setData(res.data);
-      })
-      .catch((error) => {
-        setLoading(false);
-        console.log(error);
-      });
-  }, []);
-
   return (
     <>
-      <div>{!loading && <ShowBooks data={data} />}</div>
+      <Navigation />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/books' element={<Books />} />
+        <Route path='/add' element={<AddBook />} />
+        <Route path='/update' element={<UpdateBook />} />
+      </Routes>
     </>
   );
 }
