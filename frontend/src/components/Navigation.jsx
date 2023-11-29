@@ -14,9 +14,6 @@ const Navigation = () => {
         <Link className='py-2 px-4 rounded hover:bg-gray-200' to={'/add'}>
           Add Book
         </Link>
-        <Link className='py-2 px-4 rounded hover:bg-gray-200' to={'/update'}>
-          Update Book
-        </Link>
       </div>
     </nav>
   );

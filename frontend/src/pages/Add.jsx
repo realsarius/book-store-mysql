@@ -19,7 +19,7 @@ const Add = () => {
     e.preventDefault();
     console.log('handleSubmit');
     try {
-      const response = await axios.post('http://localhost:8800/books', book, {
+      const response = await axios.put('http://localhost:8800/books', book, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -44,28 +44,28 @@ const Add = () => {
             placeholder='title'
             name='title'
             onChange={handleChange}
-            className='border-2 border-gray-300 border-solid rounded focus:border-gray-600 outline-none w-full max-w-lg'
+            className='border-2 border-gray-300 border-solid rounded focus:border-gray-600 outline-none w-full max-w-lg py-1 px-2'
           />
           <input
             type='text'
             placeholder='desc'
             name='desc'
             onChange={handleChange}
-            className='border-2 border-gray-300 border-solid rounded focus:border-gray-600 outline-none w-full max-w-lg'
+            className='border-2 border-gray-300 border-solid rounded focus:border-gray-600 outline-none w-full max-w-lg py-1 px-2'
           />
           <input
             type='number'
             placeholder='price'
             name='price'
             onChange={handleChange}
-            className='border-2 border-gray-300 border-solid rounded focus:border-gray-600 outline-none w-full max-w-lg'
+            className='border-2 border-gray-300 border-solid rounded focus:border-gray-600 outline-none w-full max-w-lg py-1 px-2'
           />
           <input
             type='text'
             placeholder='cover'
             name='cover'
             onChange={handleChange}
-            className='border-2 border-gray-300 border-solid rounded focus:border-gray-600 outline-none w-full max-w-lg'
+            className='border-2 border-gray-300 border-solid rounded focus:border-gray-600 outline-none w-full max-w-lg py-1 px-2'
           />
           <input
             type='submit'

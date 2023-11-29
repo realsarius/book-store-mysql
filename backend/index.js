@@ -32,6 +32,20 @@ app.get('/books', (req, res) => {
   });
 });
 
+app.get('/books/:id', (req, res) => {
+  const id = req.params.id;
+  const q = 'SELECT * FROM books WHERE id = ?';
+
+  db.query(q, id, (err, data) => {
+    if (err) {
+      console.error('Error in MySQL query:', err);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+    console.log('Book has been fetched. Fetched Book ID:', id);
+    return res.json(data);
+  });
+});
+
 app.post('/books', (req, res) => {
   const q = 'INSERT INTO books (`title`, `desc`, `cover`, `price`) VALUES (?)';
   const values = [
@@ -48,6 +62,42 @@ app.post('/books', (req, res) => {
     }
     console.log('Book has been created. Insert ID:', data.insertId);
     return res.json('Book has been created.');
+  });
+});
+
+app.delete('/books/:id', (req, res) => {
+  const id = req.params.id;
+  const q = 'DELETE FROM books WHERE id = ?';
+
+  db.query(q, id, (err, data) => {
+    if (err) {
+      console.error('Error in MySQL query:', err);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+    console.log('Book has been deleted. Deleted ID:', id);
+    return res.json('Book has been deleted.');
+  });
+});
+
+app.put('/books/:id', (req, res) => {
+  const id = req.params.id;
+  const q =
+    'UPDATE books SET `title` = ?, `desc` = ?, `cover` = ?, `price` = ? WHERE id = ?';
+
+  const values = [
+    req.body.title,
+    req.body.desc,
+    req.body.cover,
+    parseInt(req.body.price, 10), // Parse price to an integer
+  ];
+
+  db.query(q, [...values, id], (err, data) => {
+    if (err) {
+      console.error('Error in MySQL query:', err);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+    console.log('Book has been updated. Updated Book ID:', id);
+    return res.json('Book has been updated.');
   });
 });
 
